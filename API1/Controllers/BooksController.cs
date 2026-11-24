@@ -103,6 +103,7 @@ namespace API1.Controllers
             }
         }
 
+
         [HttpDelete("{id:int}")]
         [Authorize]
         public async Task<IActionResult> Delete(int id)
@@ -116,6 +117,11 @@ namespace API1.Controllers
             {
                 return NotFound(new { message = ex.Message });
             }
+            catch (BadRequestException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
+
     }
 }

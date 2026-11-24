@@ -16,9 +16,6 @@ namespace API1.Controllers
             _authorService = authorService;
         }
 
-        /// <summary>
-        /// Получить список всех авторов
-        /// </summary>
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AuthorDto>>> GetAll()
@@ -27,9 +24,6 @@ namespace API1.Controllers
             return Ok(authors);
         }
 
-        /// <summary>
-        /// Получить автора по ID
-        /// </summary>
         [HttpGet("{id}")]
         [AllowAnonymous]
         public async Task<ActionResult<AuthorDto>> GetById(int id)
@@ -45,9 +39,6 @@ namespace API1.Controllers
             }
         }
 
-        /// <summary>
-        /// Создать нового автора (только для авторизованных)
-        /// </summary>
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<AuthorDto>> Create(CreateAuthorDto dto)
@@ -63,9 +54,6 @@ namespace API1.Controllers
             }
         }
 
-        /// <summary>
-        /// Обновить автора (только для авторизованных)
-        /// </summary>
         [HttpPut("{id}")]
         [Authorize]
         public async Task<IActionResult> Update(int id, CreateAuthorDto dto)
@@ -81,9 +69,6 @@ namespace API1.Controllers
             }
         }
 
-        /// <summary>
-        /// Удалить автора (только для авторизованных)
-        /// </summary>
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> Delete(int id)

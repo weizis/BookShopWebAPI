@@ -158,6 +158,7 @@ namespace API1.Services
                 ?? throw new Exception("Ошибка при обновлении книги");
         }
 
+
         public async Task DeleteBookAsync(int id)
         {
             var book = await _context.Books.FindAsync(id);
@@ -165,8 +166,15 @@ namespace API1.Services
             if (book == null)
                 throw new NotFoundException($"Книга с ID {id} не найдена");
 
+            var hasOrders = await _context.OrderItems
+                .AnyAsync(x => x.BookId == id);
+
+            if (hasOrders)
+                throw new BadRequestException("Нельзя удалить книгу, которая присутствует в заказах");
+
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
         }
+
     }
 }
